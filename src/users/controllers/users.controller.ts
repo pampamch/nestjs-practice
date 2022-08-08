@@ -15,6 +15,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { UsersService } from 'src/users/services/users.service';
 import { SerializedUser } from 'src/users/types';
@@ -28,13 +29,14 @@ export class UsersController {
     @Inject('USER_SERVICE') private readonly usersService: UsersService,
   ) {}
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JWTAuthGuard)
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   getAllUsers() {
     return this.usersService.getUsers();
   }
 
+  @UseGuards(JWTAuthGuard)
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('username/:username')
   getByUsername(@Param('username') username: string) {
@@ -43,6 +45,7 @@ export class UsersController {
     else throw new HttpException('User not found.', HttpStatus.BAD_REQUEST);
   }
 
+  @UseGuards(JWTAuthGuard)
   @UseInterceptors(ClassSerializerInterceptor)
   @UseFilters(HttpExceptionFilter) // pass exception filter that you create in @UseFilters decorator
   @Get('id/:id')

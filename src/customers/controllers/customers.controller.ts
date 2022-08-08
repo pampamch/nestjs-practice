@@ -16,6 +16,7 @@ import {
 import { CustomersService } from 'src/customers/services/customers.service';
 import { Request, Response } from 'express';
 import { CustomersDTO } from 'src/customers/dto/customers.dto';
+import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('customers')
 export class CustomersController {

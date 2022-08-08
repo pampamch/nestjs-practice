@@ -5,7 +5,7 @@ import entities from './typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
-import { DataSource } from 'typeorm';
+// import { DataSource } from 'typeorm';
 import { PaymentsModule } from './payments/payments.module';
 
 @Module({
@@ -24,7 +24,7 @@ import { PaymentsModule } from './payments/payments.module';
     }),
     AuthModule,
     PassportModule.register({
-      session: true,
+      // session: true,
     }),
     PaymentsModule,
   ],
@@ -32,9 +32,8 @@ import { PaymentsModule } from './payments/payments.module';
   providers: [],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource) {}
-
-  getDataSource() {
-    return this.dataSource;
-  }
+  // constructor(private dataSource: DataSource) {}
+  // getDataSource() {
+  //   return this.dataSource;
+  // }
 }
